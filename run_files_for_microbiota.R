@@ -1,4 +1,5 @@
 rm(list=ls(all=TRUE))
+setwd("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality")
 
 ## Install dada2 package
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -60,4 +61,20 @@ rm(derepF); rm(derepR)
 
 # Construct sequence table and remove chimeras
 seqtab <- makeSequenceTable(mergers)
-saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/run1/output") # CHANGE ME to where you want sequence table saved
+saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/seqtab.rds") # CHANGE ME to where you want sequence table saved
+
+# Remove chimeras
+st.all <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/seqtab.rds")
+seqtab <- removeBimeraDenovo(st.all, method="consensus", multithread=TRUE)
+
+# Assign taxonomy
+tax <- assignTaxonomy(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/silva_nr_v132_train_set.fa.gz", multithread=TRUE)
+tax <- addSpecies(tax, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/silva_species_assignment_v132.fa.gz")
+
+taxa.print <- tax # Removing sequence rownames for display only
+rownames(taxa.print) <- NULL
+head(taxa.print)
+
+## Save files
+saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_final.rds") 
+saveRDS(tax, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_final.rds") 
