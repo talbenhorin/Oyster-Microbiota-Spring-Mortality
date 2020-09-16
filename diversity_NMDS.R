@@ -11,7 +11,8 @@ taxa <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortali
 samples.out <- rownames(seqtab)
 
 sites <- read.csv("sites.csv", fill = FALSE, header = TRUE) 
-samdf <- data.frame(Site=sites)
+counters <- read.csv("counters.csv", fill = FALSE, header = TRUE)
+samdf <- data.frame(Site=sites,count=counters)
 rownames(samdf) <- samples.out
 
 ps <- phyloseq(otu_table(seqtab, taxa_are_rows=FALSE), 
@@ -23,13 +24,10 @@ names(dna) <- taxa_names(ps)
 ps <- merge_phyloseq(ps, dna)
 taxa_names(ps) <- paste0("ASV", seq(ntaxa(ps)))
 
-#plot_richness(ps, x="Site", measures=c("Shannon", "Simpson"))
-
 # Transform data to proportions as appropriate for Bray-Curtis distances
 ps.prop <- transform_sample_counts(ps, function(otu) otu/sum(otu))
-ord.nmds.bray <- ordinate(ps.prop, method="PCoA", distance="bray")
-
-plot_ordination(ps.prop, ord.nmds.bray, type="" , color="Site")
+ord.nmds.bray <- ordinate(ps.prop, method="NMDS", distance="bray")
+plot_ordination(ps.prop, ord.nmds.bray, "samples", color="Site")
 
 
 
