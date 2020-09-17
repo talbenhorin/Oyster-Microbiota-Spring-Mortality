@@ -37,7 +37,7 @@ prevalenceThreshold = 0.05 * nsamples(ps)
 # Filter out prevalence
 keepTaxa = rownames(prevdf)[(prevdf$Prevalence >= prevalenceThreshold)]
 ps1 = prune_taxa(keepTaxa, ps)
-ps2 = tax_glom(ps1, "Genus", NArm = TRUE)
+ps2 = tax_glom(ps1, "Genus", NArm = TRUE) # 
 
 ## Abundance value transformation#
 ps2ra = transform_sample_counts(ps2, function(x){x / sum(x)}) # Relative abundance
