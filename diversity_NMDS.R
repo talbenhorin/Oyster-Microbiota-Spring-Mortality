@@ -13,7 +13,6 @@ taxa <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortali
 samples.out <- rownames(seqtab)
 
 sites <- read.csv("sites.csv", fill = FALSE, header = TRUE) 
-counters <- read.csv("counters.csv", fill = FALSE, header = TRUE)
 samdf <- data.frame(Site=sites,count=counters) #Fake data b/c the plot_ordination plot-by bug
 rownames(samdf) <- samples.out
 
@@ -37,19 +36,17 @@ prevalenceThreshold = 0.05 * nsamples(ps)
 # Filter out prevalence
 keepTaxa = rownames(prevdf)[(prevdf$Prevalence >= prevalenceThreshold)]
 ps1 = prune_taxa(keepTaxa, ps)
-ps2 = tax_glom(ps1, "Genus", NArm = TRUE) # 
+ps2 = tax_glom(ps1, "Genus", NArm = TRUE) #glom the pruned taxa 
 
 ## Abundance value transformation#
 ps2ra = transform_sample_counts(ps2, function(x){x / sum(x)}) # Relative abundance
-
-## Ordination Plots from transformed data
-ordu <- ordinate(ps2ra, method = "NMDS", distance ="bray")
-plot_ordination(ps2ra, ordu, color = "Site")
 
 top20 <- names(sort(taxa_sums(ps2ra), decreasing=TRUE))[1:20]
 ps2ra.top20 <- transform_sample_counts(ps2ra, function(OTU) OTU/sum(OTU))
 ps2ra.top20 <- prune_taxa(top20, ps2ra.top20)
 plot_bar(ps2ra.top20, fill="Genus")
 
-
+## Ordination Plots from transformed data
+ordu <- ordinate(ps2ra.top20, method = "NMDS", distance ="bray")
+plot_ordination(ps2ra.top20, ordu, color = "Site")
 
