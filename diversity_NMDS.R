@@ -7,7 +7,6 @@ library(Biostrings); packageVersion("Biostrings")
 library(ggplot2); packageVersion("ggplot2")
 theme_set(theme_bw())
 
-x <- 7
 seqtab <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_final.rds")
 taxa <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_final.rds")
 
