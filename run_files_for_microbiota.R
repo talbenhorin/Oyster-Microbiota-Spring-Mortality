@@ -59,7 +59,7 @@ for(sam in sample.names) {
 }
 rm(derepF); rm(derepR)
 
-# Construct sequence table and remove chimeras
+# Construct sequence table
 seqtab <- makeSequenceTable(mergers)
 saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/seqtab.rds") # CHANGE ME to where you want sequence table saved
 
