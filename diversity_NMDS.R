@@ -34,6 +34,7 @@ prevdf = data.frame(Prevalence = prevdf,
 ## Filtering
 #  Define prevalence threshold as 5% of total samples
 prevalenceThreshold = 0.05 * nsamples(ps)
+
 # Filter out prevalence
 keepTaxa = rownames(prevdf)[(prevdf$Prevalence >= prevalenceThreshold)]
 ps1 = prune_taxa(keepTaxa, ps)
