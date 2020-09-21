@@ -13,7 +13,7 @@ taxa <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortali
 samples.out <- rownames(seqtab)
 
 sites <- read.csv("sites.csv", fill = FALSE, header = TRUE) 
-samdf <- data.frame(Site=sites,count=counters) #Fake data b/c the plot_ordination plot-by bug
+samdf <- data.frame(Site=sites$Site,Event=sites$Event) #Fake data b/c the plot_ordination plot-by bug
 rownames(samdf) <- samples.out
 
 ## "Phyloseq" OTU table
@@ -49,5 +49,5 @@ plot_bar(ps2ra.top20, fill="Genus")
 
 ## Ordination Plots from transformed data
 ordu <- ordinate(ps2ra.top20, method = "NMDS", distance ="bray")
-plot_ordination(ps2ra.top20, ordu, color = "Site")
+plot_ordination(ps2ra.top20, ordu, color = "Event")
 
