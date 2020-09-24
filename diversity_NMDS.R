@@ -45,7 +45,7 @@ ps2ra = transform_sample_counts(ps2, function(x){x / sum(x)}) # Relative abundan
 top20 <- names(sort(taxa_sums(ps2ra), decreasing=TRUE))[1:20]
 ps2ra.top20 <- transform_sample_counts(ps2ra, function(OTU) OTU/sum(OTU))
 ps2ra.top20 <- prune_taxa(top20, ps2ra.top20)
-plot_bar(ps2ra.top20, fill="Genus")
+plot_bar(ps2ra, fill="Genus")
 
 ## Ordination Plots from transformed data
 ordu <- ordinate(ps2ra.top20, method = "NMDS", distance ="bray")
