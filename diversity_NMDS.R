@@ -7,12 +7,12 @@ library(Biostrings); packageVersion("Biostrings")
 library(ggplot2); packageVersion("ggplot2")
 theme_set(theme_bw())
 
-seqtab <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_final.rds")
-taxa <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_final.rds")
+seqtab <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_water_final.rds")
+taxa <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_water_final.rds")
 
 samples.out <- rownames(seqtab)
 
-sites <- read.csv("sites.csv", fill = FALSE, header = TRUE) 
+sites <- read.csv("sites_water.csv", fill = FALSE, header = TRUE) 
 samdf <- data.frame(Site=sites$Site,Event=sites$Event) #Fake data b/c the plot_ordination plot-by bug
 rownames(samdf) <- samples.out
 
@@ -45,9 +45,9 @@ ps2ra = transform_sample_counts(ps2, function(x){x / sum(x)}) # Relative abundan
 top20 <- names(sort(taxa_sums(ps2ra), decreasing=TRUE))[1:20]
 ps2ra.top20 <- transform_sample_counts(ps2ra, function(OTU) OTU/sum(OTU))
 ps2ra.top20 <- prune_taxa(top20, ps2ra.top20)
-plot_bar(ps2ra, fill="Genus")
+plot_bar(ps2ra.top20, fill="Genus")
 
 ## Ordination Plots from transformed data
-ordu <- ordinate(ps2ra.top20, method = "NMDS", distance ="bray")
+ordu <- ordinate(ps2ra.top20, method = "PCoA", distance ="bray")
 plot_ordination(ps2ra.top20, ordu, color = "Event")
 
