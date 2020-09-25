@@ -7,8 +7,8 @@ library(Biostrings); packageVersion("Biostrings")
 library(ggplot2); packageVersion("ggplot2")
 theme_set(theme_bw())
 
-seqtab <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_water_final.rds")
-taxa <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_water_final.rds")
+seqtab <- readRDS("output/seqtab_water_final.rds")
+taxa <- readRDS("output/tax_water_final.rds")
 
 samples.out <- rownames(seqtab)
 
