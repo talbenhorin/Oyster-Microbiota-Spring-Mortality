@@ -1,5 +1,10 @@
 rm(list=ls(all=TRUE))
 
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("phyloseq")
+
 library(gridExtra)
 library(knitr)
 library(phyloseq); packageVersion("phyloseq")
