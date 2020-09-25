@@ -1,5 +1,4 @@
 rm(list=ls(all=TRUE))
-setwd("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality")
 
 ## Install dada2 package
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -9,8 +8,8 @@ BiocManager::install("dada2", version = "3.11")
 library(dada2); packageVersion("dada2")
 
 ## Filtering sequences
-pathF <- "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/forward" # CHANGE ME to the directory containing your demultiplexed forward-read fastqs
-pathR <- "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/reverse" # CHANGE ME to the directory containing your demultiplexed reverse-read fastqs
+pathF <- "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/Fwater" # CHANGE ME to the directory containing your demultiplexed forward-read fastqs
+pathR <- "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/Rwater" # CHANGE ME to the directory containing your demultiplexed reverse-read fastqs
 
 filtpathF <- file.path(pathF, "filtered") # Filtered forward files go into the pathF/filtered/ subdirectory
 filtpathR <- file.path(pathR, "filtered") 
@@ -28,8 +27,8 @@ filterAndTrim(fwd=file.path(pathF, fastqFs), filt=file.path(filtpathF, fastqFs),
 
 # Infer sequence variants
 # File parsing
-filtpathF <- "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/forward/filtered" # CHANGE ME to the directory containing your filtered forward fastqs
-filtpathR <- "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/reverse/filtered"
+filtpathF <- "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/Fwater/filtered" # CHANGE ME to the directory containing your filtered forward fastqs
+filtpathR <- "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/Rwater/filtered"
 filtFs <- list.files(filtpathF, pattern="fastq.gz", full.names = TRUE)
 filtRs <- list.files(filtpathR, pattern="fastq.gz", full.names = TRUE)
 sample.names <- sapply(strsplit(basename(filtFs), "_"), `[`, 1) # Assumes filename = samplename_XXX.fastq.gz
@@ -76,5 +75,5 @@ rownames(taxa.print) <- NULL
 head(taxa.print)
 
 ## Save files
-saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_final.rds") 
-saveRDS(tax, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_final.rds") 
+saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_water_final.rds") 
+saveRDS(tax, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_water_final.rds") 
