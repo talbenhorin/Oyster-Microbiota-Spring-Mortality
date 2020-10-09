@@ -58,5 +58,5 @@ p = p + geom_point(size=7, alpha=0.75)
 p = p + scale_colour_brewer(type="qual", palette="Set1")
 #p = p + geom_text(mapping = aes(label = samdf$ID), size = 4, vjust = 1.5) 
 
-ps2.vibrio = subset_taxa(ps2.top30, Class=="Gammaproteobacteria")
+ps2.vibrio = subset_taxa(ps2.top30, Genus=="Vibrio")
 plot_bar(ps2.vibrio)
