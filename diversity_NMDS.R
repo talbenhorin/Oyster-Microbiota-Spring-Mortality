@@ -12,12 +12,12 @@ library(Biostrings); packageVersion("Biostrings")
 library(ggplot2); packageVersion("ggplot2")
 theme_set(theme_bw())
 
-seqtab <- readRDS("output/seqtab_water_final.rds")
-taxa <- readRDS("output/tax_water_final.rds")
+seqtab <- readRDS("output/seqtab_final.rds")
+taxa <- readRDS("output/tax_final.rds")
 
 samples.out <- rownames(seqtab)
 
-sites <- read.csv("sites_water.csv", fill = FALSE, header = TRUE) 
+sites <- read.csv("sites.csv", fill = FALSE, header = TRUE) 
 samdf <- data.frame(Site=sites$Site,Event=sites$Event) #Fake data b/c the plot_ordination plot-by bug
 rownames(samdf) <- samples.out
 
@@ -53,6 +53,6 @@ ps2ra.top20 <- prune_taxa(top20, ps2ra.top20)
 plot_bar(ps2ra.top20, fill="Genus")
 
 ## Ordination Plots from transformed data
-ordu <- ordinate(ps2ra.top20, method = "PCoA", distance ="bray")
+ordu <- ordinate(ps2ra.top20, method = "NMDS", distance ="bray")
 plot_ordination(ps2ra.top20, ordu, color = "Event")
 
