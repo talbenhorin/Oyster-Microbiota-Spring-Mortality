@@ -12,15 +12,6 @@ library(Biostrings); packageVersion("Biostrings")
 library(ggplot2); packageVersion("ggplot2")
 theme_set(theme_bw())
 
-<<<<<<< HEAD
-seqtab <- readRDS("output/seqtab_final.rds")
-taxa <- readRDS("output/tax_final.rds")
-
-samples.out <- rownames(seqtab)
-
-sites <- read.csv("sites.csv", fill = FALSE, header = TRUE) 
-samdf <- data.frame(Site=sites$Site,Event=sites$Event) #Fake data b/c the plot_ordination plot-by bug
-=======
 seqtab <- readRDS("output/seqtab_cut_final.rds")
 taxa <- readRDS("output/tax_cut_final.rds")
 
@@ -28,7 +19,6 @@ samples.out <- rownames(seqtab)
 
 sites <- read.csv("sites_cut.csv", fill = FALSE, header = TRUE) 
 samdf <- data.frame(Event=sites$Site,Group=sites$Group,ID=sites$Sample) 
->>>>>>> b6b76ffe6a22350d170b9aac7c2dbb36cd6e147b
 rownames(samdf) <- samples.out
 
 ## "Phyloseq" OTU table
@@ -61,12 +51,6 @@ top30 <- names(sort(taxa_sums(ps2), decreasing=TRUE))[1:30]
 ps2.top30 <- transform_sample_counts(ps2, function(OTU) OTU/sum(OTU))
 ps2.top30 <- prune_taxa(top30, ps2.top30)
 
-## Ordination Plots from transformed data
-<<<<<<< HEAD
-ordu <- ordinate(ps2ra.top20, method = "NMDS", distance ="bray")
-plot_ordination(ps2ra.top20, ordu, color = "Event")
-
-=======
 ordu <- ordinate(ps2.top30, method = "PCoA", distance ="bray")
 p = plot_ordination(ps2.top30, ordu, color = "Event", shape = "Group")
 p = p + geom_point(size=7, alpha=0.75)
