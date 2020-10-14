@@ -27,8 +27,8 @@ filterAndTrim(fwd=file.path(pathF, fastqFs), filt=file.path(filtpathF, fastqFs),
 
 # Infer sequence variants
 # File parsing
-filtpathF <- "fcut/filtered" # CHANGE ME to the directory containing your filtered forward fastqs
-filtpathR <- "rcut/filtered"
+filtpathF <- "fcutwater/filtered" # CHANGE ME to the directory containing your filtered forward fastqs
+filtpathR <- "rcutwater/filtered"
 filtFs <- list.files(filtpathF, pattern="fastq.gz", full.names = TRUE)
 filtRs <- list.files(filtpathR, pattern="fastq.gz", full.names = TRUE)
 sample.names <- sapply(strsplit(basename(filtFs), "_"), `[`, 1) # Assumes filename = samplename_XXX.fastq.gz
@@ -76,4 +76,4 @@ head(taxa.print)
 
 ## Save files
 saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_cut_water_final.rds") 
-saveRDS(tax, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_cut__water_final.rds") 
+saveRDS(tax, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_cut_water_final.rds") 
