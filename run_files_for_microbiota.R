@@ -60,10 +60,10 @@ rm(derepF); rm(derepR)
 
 # Construct sequence table
 seqtab <- makeSequenceTable(mergers)
-saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/seqtab.rds") # CHANGE ME to where you want sequence table saved
+saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab.rds") # CHANGE ME to where you want sequence table saved
 
 # Remove chimeras
-st.all <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/seqtab.rds")
+st.all <- readRDS("E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab.rds")
 seqtab <- removeBimeraDenovo(st.all, method="consensus", multithread=TRUE)
 
 # Assign taxonomy
