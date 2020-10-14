@@ -4,11 +4,16 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install("phyloseq")
 
+#install.packages("devtools")
+#devtools::install_github("karthik/wesanderson")
+#library(devtools)
+
 library(gridExtra)
 library(knitr)
 library(phyloseq); packageVersion("phyloseq")
 library(Biostrings); packageVersion("Biostrings")
 library(ggplot2); packageVersion("ggplot2")
+library(wesanderson)
 
 theme_set(theme_bw())
 
@@ -17,7 +22,7 @@ taxa <- readRDS("output/tax_cut_water_final.rds")
 
 samples.out <- rownames(seqtab)
 
-sites <- read.csv("sites_cut.csv", fill = FALSE, header = TRUE) 
+sites <- read.csv("sites_cut_water.csv", fill = FALSE, header = TRUE) 
 samdf <- data.frame(Event=sites$Site,Group=sites$Group,ID=sites$Sample) 
 rownames(samdf) <- samples.out
 
@@ -55,7 +60,7 @@ ordu <- ordinate(ps2.top30, method = "PCoA", distance ="bray")
 p = plot_ordination(ps2.top30, ordu, color = "Event", shape = "Group")
 p = p + geom_point(size=7, alpha=0.75)
 p = p + scale_colour_brewer(type="qual", palette="Set1")
-#p = p + geom_text(mapping = aes(label = samdf$ID), size = 4, vjust = 1.5) 
+p = p + geom_text(mapping = aes(label = samdf$ID), size = 4, vjust = 1.5) 
 
 ps2.vibrio = subset_taxa(ps2.top30, Genus=="Vibrio")
 #plot_bar(ps2.vibrio)
