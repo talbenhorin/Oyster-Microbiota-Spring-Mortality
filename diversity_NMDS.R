@@ -2,7 +2,6 @@ rm(list=ls(all=TRUE))
 
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
-
 BiocManager::install("phyloseq")
 
 library(gridExtra)
@@ -10,10 +9,11 @@ library(knitr)
 library(phyloseq); packageVersion("phyloseq")
 library(Biostrings); packageVersion("Biostrings")
 library(ggplot2); packageVersion("ggplot2")
+
 theme_set(theme_bw())
 
-seqtab <- readRDS("output/seqtab_cut_final.rds")
-taxa <- readRDS("output/tax_cut_final.rds")
+seqtab <- readRDS("output/seqtab_cut_water_final.rds")
+taxa <- readRDS("output/tax_cut_water_final.rds")
 
 samples.out <- rownames(seqtab)
 
