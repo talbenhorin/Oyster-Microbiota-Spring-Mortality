@@ -8,8 +8,8 @@ BiocManager::install("dada2", version = "3.11")
 library(dada2); packageVersion("dada2")
 
 ## Filtering sequences
-pathF <- "fcut" # CHANGE ME to the directory containing your demultiplexed forward-read fastqs
-pathR <- "rcut" # CHANGE ME to the directory containing your demultiplexed reverse-read fastqs
+pathF <- "fcutwater" # CHANGE ME to the directory containing your demultiplexed forward-read fastqs
+pathR <- "rcutwater" # CHANGE ME to the directory containing your demultiplexed reverse-read fastqs
 
 filtpathF <- file.path(pathF, "filtered") # Filtered forward files go into the pathF/filtered/ subdirectory
 filtpathR <- file.path(pathR, "filtered") 
@@ -75,5 +75,5 @@ rownames(taxa.print) <- NULL
 head(taxa.print)
 
 ## Save files
-saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_cut_final.rds") 
-saveRDS(tax, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_cut_final.rds") 
+saveRDS(seqtab, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/seqtab_cut_water_final.rds") 
+saveRDS(tax, "E:/tbenhor/libraries/Documents/Oyster-Microbiota-Spring-Mortality/output/tax_cut__water_final.rds") 
