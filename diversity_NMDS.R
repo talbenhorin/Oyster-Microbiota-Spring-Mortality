@@ -47,14 +47,6 @@ detach("package:phangorn", unload=TRUE)
 ps <- phyloseq(tax_table(taxa), sample_data(samdf),
                otu_table(seqtab, taxa_are_rows = FALSE),phy_tree(fitGTR$tree))
 
-ps1 <- phyloseq(otu_table(seqtab, taxa_are_rows=FALSE), 
-              tax_table(taxa),
-              sample_data(samdf), 
-              rand_tree)
-
-physeq.ps = merge_phyloseq(ps, sample_data(samdf), tree)
-
-
 # Compute prevalence of each feature, store as data.frame
 prevdf = apply(X = otu_table(ps),
                MARGIN = ifelse(taxa_are_rows(ps), yes = 1, no = 2),
