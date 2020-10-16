@@ -30,7 +30,7 @@ rownames(samdf) <- samples.out
 #ps <- phyloseq(otu_table(seqtab, taxa_are_rows=FALSE), 
 #               sample_data(samdf), 
 #               tax_table(taxa))
-
+F
 ## Construct phylogenetic tree
 seqs <- getSequences(seqtab)
 names(seqs) <- seqs # This propagates to the tip labels of the tree
