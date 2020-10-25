@@ -6,7 +6,9 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install("phyloseq")
 BiocManager::install("DECIPHER")
 BiocManager::install("phangorn")
+BiocManager::install("dada2", version = "3.11")
 
+library(dada2); packageVersion("dada2")
 library(ape)
 library(gridExtra)
 library(knitr)
@@ -23,7 +25,7 @@ taxa <- readRDS("output/tax_cut_final.rds")
 samples.out <- rownames(seqtab)
 
 sites <- read.csv("sites_cut.csv", fill = FALSE, header = TRUE) 
-samdf <- data.frame(Site=sites$Site,Group=sites$Group,ID=sites$Sample,Event=sites$Mort) 
+samdf <- data.frame(Site=sites$Site,ID=sites$Sample,Event=sites$Mort,Group=sites$Group) 
 rownames(samdf) <- samples.out
 
 ## "Phyloseq" object from OTU table
@@ -31,8 +33,10 @@ ps <- phyloseq(otu_table(seqtab, taxa_are_rows=FALSE),
                sample_data(samdf), 
                tax_table(taxa))
 
-ps.vibrio <- subset_taxa(ps, Genus=="Vibrio")
+ps.vibrio = prune_taxa(keepTaxa, ps)
 
+## Phylogenetic Trees by Genus
+ps.vibrio <- subset_taxa(ps, Genus=="Vibrio")
 ## Construct phylogenetic tree
 seqs <- getSequences(ps.vibrio@otu_table)
 names(seqs) <- seqs # This propagates to the tip labels of the tree
@@ -46,6 +50,10 @@ fitGTR <- optim.pml(fitGTR, model="GTR", optInv=TRUE, optGamma=TRUE,
                     rearrangement = "stochastic", control = pml.control(trace = 0))
 ps.vibrio = merge_phyloseq(ps.vibrio, sample_data(samdf), treeNJ)
 
-p1 = plot_tree(ps.vibrio, color = "Site", shape = "Group", ladderize="left") + coord_polar(theta="y")
+plot_bar(ps, fill="Genus")
+
+p1 = plot_tree(ps.vibrio, color = "Site", shape = "Group", ladderize="left")# + coord_polar(theta="y")
+
+size = "abundance"
 
 detach("package:phangorn", unload=TRUE)
