@@ -3,7 +3,9 @@ rm(list=ls(all=TRUE))
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install("phyloseq")
+BiocManager::install("dada2", version = "3.11")
 
+library(dada2); packageVersion("dada2")
 library(ape)
 library(gridExtra)
 library(knitr)
@@ -18,7 +20,7 @@ taxa <- readRDS("output/tax_cut_final.rds")
 samples.out <- rownames(seqtab)
 
 sites <- read.csv("sites_cut.csv", fill = FALSE, header = TRUE) 
-samdf <- data.frame(Event=sites$Site,Group=sites$Group,ID=sites$Sample) 
+samdf <- data.frame(Site=sites$Site,Group=sites$Group,ID=sites$Sample) 
 rownames(samdf) <- samples.out
 
 ## "Phyloseq" object from OTU table
@@ -49,6 +51,18 @@ ps2.top10 <- transform_sample_counts(ps2, function(OTU) OTU/sum(OTU))
 ps2.top10 <- prune_taxa(top10, ps2.top10)
 
 ps2.top10.BS <- subset_samples(ps2.top10, Site=="BS")
+ps2.top10.SC <- subset_samples(ps2.top10, Site=="SC")
+ps2.top10.NR <- subset_samples(ps2.top10, Site=="NR")
 
-plot_heatmap(ps2.top10, taxa.label = "Genus", sample.label = "Group", low="#FFFFCC", high="#000033", na.value = "white", sample.order = "Group")
+names <- taxa_names(ps2.top10.BS)
 
+p1 = plot_heatmap(ps2.top10.BS, taxa.label = "Genus", sample.label = "Group", low="#FFFFCC", 
+                  high="#000033", na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
+                  trans = identity_trans())
+p2 = plot_heatmap(ps2.top10.SC, taxa.label = "Genus", sample.label = "Group", low="#FFFFCC", 
+                  high="#000033", na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
+                  trans = identity_trans())
+p3 = plot_heatmap(ps2.top10.NR, taxa.label = "Genus", sample.label = "Group", low="#FFFFCC", 
+                  high="#000033", na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
+                  trans = identity_trans())
+grid.arrange(p1, p2, p3, nrow = 1)
