@@ -48,7 +48,7 @@ top50 <- names(sort(taxa_sums(ps2), decreasing=TRUE))[1:50]
 ps2.top50 <- transform_sample_counts(ps2, function(OTU) OTU/sum(OTU))
 ps2.top50 <- prune_taxa(top50, ps2.top50)
 
-# Plots from refined database
+# Plots from refined databases
 plot_bar(ps2.top50, fill="Genus")
 
 ordu <- ordinate(ps2.top50, method = "PCoA", distance ="bray")
