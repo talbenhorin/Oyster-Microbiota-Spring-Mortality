@@ -8,8 +8,8 @@ BiocManager::install("dada2", version = "3.11")
 library(dada2); packageVersion("dada2")
 
 ## Filtering sequences
-pathF <- "fcutwater" # CHANGE ME to the directory containing your demultiplexed forward-read fastqs
-pathR <- "rcutwater" # CHANGE ME to the directory containing your demultiplexed reverse-read fastqs
+pathF <- "fcut" # CHANGE ME to the directory containing your demultiplexed forward-read fastqs
+pathR <- "rcut" # CHANGE ME to the directory containing your demultiplexed reverse-read fastqs
 
 filtpathF <- file.path(pathF, "filtered") # Filtered forward files go into the pathF/filtered/ subdirectory
 filtpathR <- file.path(pathR, "filtered") 
