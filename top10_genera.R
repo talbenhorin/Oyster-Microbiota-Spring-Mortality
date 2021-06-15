@@ -57,29 +57,22 @@ ps2.top10.NR <- subset_samples(ps2.top10, Site=="NR")
 
 names <- taxa_names(ps2.top10.BS)
 
-p1 = plot_heatmap(ps2.top10.BS, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
+p1 = plot_heatmap(ps2.top10.NR, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
                   na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
                   trans = identity_trans())
-p1 = p1 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.95)) +
-                  theme(axis.title.y=element_blank()) +                
-                  theme(legend.position="none") +
-                  ggtitle("Bogue Sound: Unimpacted Control") +
-                  theme(axis.title.x=element_blank())
-p2 = plot_heatmap(ps2.top10.NR, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
+p1 = p1  + theme(axis.text.x = element_text(size=8, angle=30, hjust=1, vjust=0.9),
+                  legend.title = element_text(size = 10)) +
+                  labs(fill = "Relative\nabundance")
+p2 = plot_heatmap(ps2.top10.SC, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
                   na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
                   trans = identity_trans())
-p2 = p2 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.95)) +
-                  theme(axis.title.y=element_blank(),axis.text.y=element_blank()) + 
-                  theme(legend.position="none") +
-                  ggtitle("Lower New River: Impacted by Spring Mortality") +
-                  theme(axis.title.x=element_blank())
-p3 = plot_heatmap(ps2.top10.SC, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
+p2 = p2  + theme(axis.text.x = element_text(size=8, angle=30, hjust=1, vjust=0.9),
+                 legend.title = element_text(size = 10)) +
+                  labs(fill = "Relative\nabundance")
+p3 = plot_heatmap(ps2.top10.BS, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
                   na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
                   trans = identity_trans())
-p3 = p3 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.95),
-                  legend.title = element_text(size = 16)) +
-                  labs(fill = "Relative\nabundance") +
-                  theme(axis.title.y=element_blank(),axis.text.y=element_blank()) +
-                  ggtitle("Salter Creek: Impacted by Spring Mortality") +
-                  theme(axis.title.x=element_blank())
+p3 = p3 + theme(axis.text.x = element_text(size=8, angle=30, hjust=1, vjust=0.9),
+                  legend.title = element_text(size = 10)) +
+                  labs(fill = "Relative\nabundance")
 grid.arrange(p1, p2, p3, nrow = 1)
