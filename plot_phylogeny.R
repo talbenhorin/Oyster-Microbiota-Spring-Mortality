@@ -50,10 +50,6 @@ fitGTR <- optim.pml(fitGTR, model="GTR", optInv=TRUE, optGamma=TRUE,
                     rearrangement = "stochastic", control = pml.control(trace = 0))
 ps.vibrio = merge_phyloseq(ps.vibrio, sample_data(samdf), treeNJ)
 
-plot_bar(ps, fill="Genus")
-
-p1 = plot_tree(ps.vibrio, color = "Site", shape = "Group", ladderize="left")# + coord_polar(theta="y")
-
-size = "abundance"
+p1 = plot_tree(ps.vibrio, color = "Site", shape = "Group", ladderize = TRUE) 
 
 detach("package:phangorn", unload=TRUE)
