@@ -21,7 +21,7 @@ taxa <- readRDS("output/taxtab.rds")
 samples.out <- rownames(seqtab)
 
 sites <- read.csv("sites_all.csv", fill = FALSE, header = TRUE) 
-samdf <- data.frame(Site=sites$Site,Stage=sites$Stage,Development=sites$Development,ID=sites$Sample,Mort=sites$Mort) 
+samdf <- data.frame(Stage=sites$Stage,ID=sites$Sample,OV=sites$OV) 
 rownames(samdf) <- samples.out
 
 ## "Phyloseq" object from OTU table
@@ -29,7 +29,7 @@ ps <- phyloseq(otu_table(seqtab, taxa_are_rows=FALSE),
                sample_data(samdf), 
                tax_table(taxa))
 
-ps <- subset_samples(ps, Mort=="Impact")
+ps <- subset_samples(ps, OV=="Yes")
 
 # Compute prevalence of each feature, store as data.frame
 prevdf = apply(X = otu_table(ps),
@@ -56,13 +56,13 @@ ps2.top20 <- prune_taxa(top20, ps2.top20)
 # plot_bar(ps2.top20, fill="Genus")
 
 ordu <- ordinate(ps2.top20,"NMDS","bray")
-p = plot_ordination(ps2.top20, ordu, shape = "Stage", color = "Development")
-p = p + geom_point(size=7, alpha=0.75)
+p = plot_ordination(ps2.top20, ordu, color = "Stage")
+p = p + geom_point(size=4, alpha=0.75)
 p = p + scale_colour_brewer(type="qual", palette="Set1")
 
-ps.A <- subset_samples(ps2.top20, Development=="A")
-ps.B <- subset_samples(ps2.top20, Development=="B")
-ps.C <- subset_samples(ps2.top20, Development=="C")
+ps.A <- subset_samples(ps2.top20, Stage=="Female")
+ps.B <- subset_samples(ps2.top20, Stage=="Oligo Female")
+ps.C <- subset_samples(ps2.top20, Stage=="Virilescent Female")
 
 p1 = plot_heatmap(ps.A, taxa.label = "Genus", sample.label = "ID",low="white", high="#000033", 
                   na.value = "white", sample.order = "ID",taxa.order = taxa_names(ps.A),
@@ -70,7 +70,7 @@ p1 = plot_heatmap(ps.A, taxa.label = "Genus", sample.label = "ID",low="white", h
 p1 = p1 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.95)) +
                   theme(axis.title.y=element_blank()) +                
                   theme(legend.position="none") +
-                  ggtitle("<33.3% developed") +
+                  ggtitle("Female") +
                   theme(axis.title.x=element_blank())
 p2 = plot_heatmap(ps.B, taxa.label = "Genus", sample.label = "ID",low="white", high="#000033", 
                   na.value = "white", sample.order = "ID",taxa.order = taxa_names(ps.B),
@@ -78,7 +78,7 @@ p2 = plot_heatmap(ps.B, taxa.label = "Genus", sample.label = "ID",low="white", h
 p2 = p2 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.95)) +
                   theme(axis.title.y=element_blank(),axis.text.y=element_blank()) + 
                   theme(legend.position="none") +
-                  ggtitle("33.3 - 66.7% developed") +
+                  ggtitle("Oligo Female") +
                   theme(axis.title.x=element_blank())
 p3 = plot_heatmap(ps.C, taxa.label = "Genus", sample.label = "ID",low="white", high="#000033", 
                   na.value = "white", sample.order = "ID",taxa.order = taxa_names(ps.C),
@@ -87,6 +87,6 @@ p3 = p3 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.9
                   legend.title = element_text(size = 16)) +
                   labs(fill = "Relative\nabundance") +
                   theme(axis.title.y=element_blank(),axis.text.y=element_blank()) +
-                  ggtitle(">66.7% developed") +
+                  ggtitle("Virilescent Female") +
                   theme(axis.title.x=element_blank())
 grid.arrange(p1, p2, p3, nrow = 1)
