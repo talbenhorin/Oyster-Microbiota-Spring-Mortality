@@ -15,19 +15,21 @@ library(ggplot2); packageVersion("ggplot2")
 library(scales)
 theme_set(theme_bw())
 
-seqtab <- readRDS("output/seqtab_cut_final.rds")
-taxa <- readRDS("output/tax_cut_final.rds")
+seqtab <- readRDS("output/seqtab.rds")
+taxa <- readRDS("output/taxtab.rds")
 
 samples.out <- rownames(seqtab)
 
-sites <- read.csv("sites_cut.csv", fill = FALSE, header = TRUE) 
-samdf <- data.frame(Site=sites$Site,Group=sites$Group,ID=sites$Sample) 
+sites <- read.csv("sites_all.csv", fill = FALSE, header = TRUE) 
+samdf <- data.frame(Site=sites$Site,Stage=sites$Stage,Development=sites$Development,ID=sites$Sample,Mort=sites$Mort) 
 rownames(samdf) <- samples.out
 
 ## "Phyloseq" object from OTU table
 ps <- phyloseq(otu_table(seqtab, taxa_are_rows=FALSE), 
                sample_data(samdf), 
                tax_table(taxa))
+
+ps <- subset_samples(ps, Mort=="Impact")
 
 # Compute prevalence of each feature, store as data.frame
 prevdf = apply(X = otu_table(ps),
@@ -47,32 +49,44 @@ keepTaxa = rownames(prevdf)[(prevdf$Prevalence >= prevalenceThreshold)]
 ps1 = prune_taxa(keepTaxa, ps)
 ps2 = tax_glom(ps1, "Genus", NArm = TRUE) #glom the pruned taxa 
 
-top10 <- names(sort(taxa_sums(ps2), decreasing=TRUE))[1:10]
-ps2.top10 <- transform_sample_counts(ps2, function(OTU) OTU/sum(OTU))
-ps2.top10 <- prune_taxa(top10, ps2.top10)
+top20 <- names(sort(taxa_sums(ps2), decreasing=TRUE))[1:20]
+ps2.top20 <- transform_sample_counts(ps2, function(OTU) OTU/sum(OTU))
+ps2.top20 <- prune_taxa(top20, ps2.top20)
 
-ps2.top10.BS <- subset_samples(ps2.top10, Site=="BS")
-ps2.top10.SC <- subset_samples(ps2.top10, Site=="SC")
-ps2.top10.NR <- subset_samples(ps2.top10, Site=="NR")
+# plot_bar(ps2.top20, fill="Genus")
 
-names <- taxa_names(ps2.top10.BS)
+ordu <- ordinate(ps2.top20,"NMDS","bray")
+p = plot_ordination(ps2.top20, ordu, shape = "Stage", color = "Development")
+p = p + geom_point(size=7, alpha=0.75)
+p = p + scale_colour_brewer(type="qual", palette="Set1")
 
-p1 = plot_heatmap(ps2.top10.NR, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
-                  na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
+ps.A <- subset_samples(ps2.top20, Development=="A")
+ps.B <- subset_samples(ps2.top20, Development=="B")
+ps.C <- subset_samples(ps2.top20, Development=="C")
+
+p1 = plot_heatmap(ps.A, taxa.label = "Genus", sample.label = "ID",low="white", high="#000033", 
+                  na.value = "white", sample.order = "ID",taxa.order = taxa_names(ps.A),
                   trans = identity_trans())
-p1 = p1  + theme(axis.text.x = element_text(size=8, angle=30, hjust=1, vjust=0.9),
-                  legend.title = element_text(size = 10)) +
-                  labs(fill = "Relative\nabundance")
-p2 = plot_heatmap(ps2.top10.SC, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
-                  na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
+p1 = p1 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.95)) +
+                  theme(axis.title.y=element_blank()) +                
+                  theme(legend.position="none") +
+                  ggtitle("<33.3% developed") +
+                  theme(axis.title.x=element_blank())
+p2 = plot_heatmap(ps.B, taxa.label = "Genus", sample.label = "ID",low="white", high="#000033", 
+                  na.value = "white", sample.order = "ID",taxa.order = taxa_names(ps.B),
                   trans = identity_trans())
-p2 = p2  + theme(axis.text.x = element_text(size=8, angle=30, hjust=1, vjust=0.9),
-                 legend.title = element_text(size = 10)) +
-                  labs(fill = "Relative\nabundance")
-p3 = plot_heatmap(ps2.top10.BS, taxa.label = "Genus", sample.label = "Group",low="white", high="#000033", 
-                  na.value = "white", sample.order = "Group",taxa.order = taxa_names(ps2.top10.BS),
+p2 = p2 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.95)) +
+                  theme(axis.title.y=element_blank(),axis.text.y=element_blank()) + 
+                  theme(legend.position="none") +
+                  ggtitle("33.3 - 66.7% developed") +
+                  theme(axis.title.x=element_blank())
+p3 = plot_heatmap(ps.C, taxa.label = "Genus", sample.label = "ID",low="white", high="#000033", 
+                  na.value = "white", sample.order = "ID",taxa.order = taxa_names(ps.C),
                   trans = identity_trans())
-p3 = p3 + theme(axis.text.x = element_text(size=8, angle=30, hjust=1, vjust=0.9),
-                  legend.title = element_text(size = 10)) +
-                  labs(fill = "Relative\nabundance")
+p3 = p3 + theme(axis.text.x = element_text(size=7, angle=0, hjust=0.5, vjust=0.95),
+                  legend.title = element_text(size = 16)) +
+                  labs(fill = "Relative\nabundance") +
+                  theme(axis.title.y=element_blank(),axis.text.y=element_blank()) +
+                  ggtitle(">66.7% developed") +
+                  theme(axis.title.x=element_blank())
 grid.arrange(p1, p2, p3, nrow = 1)
