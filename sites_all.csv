@@ -1,1 +1,82 @@
-Sample,Stage,Site,Mort,Development,Oligo,I,MaleNR1,M,NR,Impact,C,B,B,ANR2,I,NR,Impact,A,B,A,BNR3,I,NR,Impact,A,B,A,BNR4,M,NR,Impact,A,B,B,ANR5,F,NR,Impact,B,B,B,BNR6,I,NR,Impact,A,B,A,BNR7,M,NR,Impact,B,B,B,ANR8,F,NR,Impact,C,B,B,BNR9,M,NR,Impact,C,B,B,ANR10,M,NR,Impact,C,B,B,ANR11,M,NR,Impact,C,B,B,ANR12,M,NR,Impact,C,B,B,ANR13,I,NR,Impact,A,B,A,BNR14,M,NR,Impact,C,B,B,ANR15,VF,NR,Impact,B,B,B,BNR16,VF,NR,Impact,C,B,B,BNR17,VF,NR,Impact,B,B,B,BNR18,M,NR,Impact,A,B,B,ANR19,VF,NR,Impact,C,B,B,BNR20,M,NR,Impact,A,B,B,ANR21,VF,NR,Impact,A,B,B,BNR22,I,NR,Impact,A,B,A,BNR23,I,NR,Impact,A,B,A,BNR24,VF,NR,Impact,A,B,B,BNR25,I,NR,Impact,A,B,A,BNR26,I,NR,Impact,A,B,A,BNR27,M,NR,Impact,A,B,B,ANR28,OF,NR,Impact,A,A,B,BNR29,M,NR,Impact,B,B,B,ANR30,VF,NR,Impact,A,B,B,BSC1,M,SC,Impact,B,B,B,ASC2,OF,SC,Impact,A,A,B,BSC3,I,SC,Impact,B,B,A,BSC4,M,SC,Impact,B,B,B,ASC5,M,SC,Impact,A,B,B,ASC6,I,SC,Impact,A,B,A,BSC7,F,SC,Impact,A,B,B,BSC8,M,SC,Impact,B,B,B,ASC9,M,SC,Impact,B,B,B,ASC10,M,SC,Impact,A,B,B,ASC11,OF,SC,Impact,A,A,B,BSC12,OF,SC,Impact,B,A,B,BSC13,M,SC,Impact,C,B,B,ASC14,VF,SC,Impact,B,B,B,BSC15,M,SC,Impact,C,B,B,ASC16,OF,SC,Impact,B,A,B,BSC17,OF,SC,Impact,B,A,B,BSC18,M,SC,Impact,C,B,B,ASC19,M,SC,Impact,C,B,B,ASC20,M,SC,Impact,C,B,B,ASC21,OF,SC,Impact,A,A,B,BSC22,I,SC,Impact,A,B,A,BSC23,M,SC,Impact,C,B,B,ASC24,F,SC,Impact,A,B,B,BSC25,M,SC,Impact,B,B,B,ASC26,M,SC,Impact,B,B,B,ASC27,OF,SC,Impact,A,A,B,BSC28,M,SC,Impact,C,B,B,ASC29,M,SC,Impact,B,B,B,ASC30,VF,SC,Impact,B,B,B,BBS1,M,BS,Control,B,B,B,ABS2,M,BS,Control,B,B,B,ABS3,M,BS,Control,C,B,B,ABS4,M,BS,Control,C,B,B,ABS5,M,BS,Control,A,B,B,ABS6,I,BS,Control,A,B,A,BBS7,F,BS,Control,C,B,B,BBS8,M,BS,Control,B,B,B,ABS9,M,BS,Control,C,B,B,ABS10,M,BS,Control,C,B,B,ABS11,M,BS,Control,A,B,B,ABS12,M,BS,Control,B,B,B,ABS13,M,BS,Control,C,B,B,ABS14,M,BS,Control,C,B,B,ABS15,M,BS,Control,C,B,B,ABS16,F,BS,Control,A,B,B,BBS17,M,BS,Control,B,B,B,ABS18,M,BS,Control,B,B,B,ABS19,I,BS,Control,A,B,A,BBS20,M,BS,Control,C,B,B,AIsoBlank,NA,NA,NA,NA,B,B,B
+Sample,Stage,Site,Mort,Oligo,I,Male,Development,OV
+NR1,Male,NR,Impact,B,B,A,89.90731835,No
+NR2,Indeterminant ,NR,Impact,B,A,B,15.22416501,No
+NR3,Indeterminant ,NR,Impact,B,A,B,0,No
+NR4,Male,NR,Impact,B,B,A,20.88437024,No
+NR5,Female,NR,Impact,B,B,B,64.43003438,Yes
+NR6,Indeterminant ,NR,Impact,B,A,B,0,No
+NR7,Male,NR,Impact,B,B,A,64.85147879,No
+NR8,Female,NR,Impact,B,B,B,90.11626747,Yes
+NR9,Male,NR,Impact,B,B,A,80.35091464,No
+NR10,Male,NR,Impact,B,B,A,88.11728323,No
+NR11,Male,NR,Impact,B,B,A,92.21138474,No
+NR12,Male,NR,Impact,B,B,A,96.27447919,No
+NR13,Indeterminant ,NR,Impact,B,A,B,7.031603551,No
+NR14,Male,NR,Impact,B,B,A,91.22269085,No
+NR15,Virilescent Female,NR,Impact,B,B,B,37.08319193,Yes
+NR16,Virilescent Female,NR,Impact,B,B,B,92.29620225,Yes
+NR17,Virilescent Female,NR,Impact,B,B,B,56.30472416,Yes
+NR18,Male,NR,Impact,B,B,A,27.51401698,No
+NR19,Virilescent Female,NR,Impact,B,B,B,81.86646076,Yes
+NR20,Male,NR,Impact,B,B,A,17.61738996,No
+NR21,Virilescent Female,NR,Impact,B,B,B,24.61905122,Yes
+NR22,Indeterminant ,NR,Impact,B,A,B,12.40738747,No
+NR23,Indeterminant ,NR,Impact,B,A,B,20.55216521,No
+NR24,Virilescent Female,NR,Impact,B,B,B,4.061636247,Yes
+NR25,Indeterminant ,NR,Impact,B,A,B,21.2107417,No
+NR26,Indeterminant ,NR,Impact,B,A,B,30.12818616,No
+NR27,Male,NR,Impact,B,B,A,29.31704944,No
+NR28,Oligo Female,NR,Impact,A,B,B,23.11182885,Yes
+NR29,Male,NR,Impact,B,B,A,44.89039458,No
+NR30,Virilescent Female,NR,Impact,B,B,B,18.79713309,Yes
+SC1,Male,SC,Impact,B,B,A,46.1684256,No
+SC2,Oligo Female,SC,Impact,A,B,B,16.25127537,Yes
+SC3,Indeterminant ,SC,Impact,B,A,B,38.27574617,No
+SC4,Male,SC,Impact,B,B,A,50.76385845,No
+SC5,Male,SC,Impact,B,B,A,7.180795376,No
+SC6,Indeterminant ,SC,Impact,B,A,B,0,No
+SC7,Female,SC,Impact,B,B,B,16.00896963,Yes
+SC8,Male,SC,Impact,B,B,A,65.75957209,No
+SC9,Male,SC,Impact,B,B,A,64.78784588,No
+SC10,Male,SC,Impact,B,B,A,31.11798366,No
+SC11,Oligo Female,SC,Impact,A,B,B,14.87371913,Yes
+SC12,Oligo Female,SC,Impact,A,B,B,41.32516399,Yes
+SC13,Male,SC,Impact,B,B,A,68.9089287,No
+SC14,Virilescent Female,SC,Impact,B,B,B,43.44383825,Yes
+SC15,Male,SC,Impact,B,B,A,67.49733244,No
+SC16,Oligo Female,SC,Impact,A,B,B,49.54561317,Yes
+SC17,Oligo Female,SC,Impact,A,B,B,45.15706281,Yes
+SC18,Male,SC,Impact,B,B,A,76.94279218,No
+SC19,Male,SC,Impact,B,B,A,67.92141989,No
+SC20,Male,SC,Impact,B,B,A,78.55939644,No
+SC21,Oligo Female,SC,Impact,A,B,B,32.93234496,Yes
+SC22,Indeterminant ,SC,Impact,B,A,B,27.72035649,No
+SC23,Male,SC,Impact,B,B,A,73.18197636,No
+SC24,Female,SC,Impact,B,B,B,27.19406667,Yes
+SC25,Male,SC,Impact,B,B,A,57.7169356,No
+SC26,Male,SC,Impact,B,B,A,62.97930213,No
+SC27,Oligo Female,SC,Impact,A,B,B,21.33704881,Yes
+SC28,Male,SC,Impact,B,B,A,78.38871666,No
+SC29,Male,SC,Impact,B,B,A,54.09795559,No
+SC30,Virilescent Female,SC,Impact,B,B,B,55.08546305,Yes
+BS1,Male,BS,Control,B,B,A,50.49458818,No
+BS2,Male,BS,Control,B,B,A,45.76497556,No
+BS3,Male,BS,Control,B,B,A,68.38336644,No
+BS4,Male,BS,Control,B,B,A,70.92139955,No
+BS5,Male,BS,Control,B,B,A,19.81853883,No
+BS6,Indeterminant ,BS,Control,B,A,B,0,No
+BS7,Female,BS,Control,B,B,B,91.90777398,No
+BS8,Male,BS,Control,B,B,A,52.8555442,No
+BS9,Male,BS,Control,B,B,A,72.49048555,No
+BS10,Male,BS,Control,B,B,A,70.53927193,No
+BS11,Male,BS,Control,B,B,A,0,No
+BS12,Male,BS,Control,B,B,A,53.86362657,No
+BS13,Male,BS,Control,B,B,A,90.10692511,No
+BS14,Male,BS,Control,B,B,A,82.98712792,No
+BS15,Male,BS,Control,B,B,A,89.32431174,No
+BS16,Female,BS,Control,B,B,B,0,No
+BS17,Male,BS,Control,B,B,A,50.04296191,No
+BS18,Male,BS,Control,B,B,A,36.38445716,No
+BS19,Indeterminant ,BS,Control,B,A,B,0,No
+BS20,Male,BS,Control,B,B,A,74.68192855,No
+IsoBlank,NA,NA,NA,B,B,B,,No
